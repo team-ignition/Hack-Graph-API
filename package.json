@@ -1,0 +1,82 @@
+{
+  "name": "serverless-trl-events-api",
+  "version": "1.0.0",
+  "description": "Serverless graphql API for the event-listener",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "main": "handler.js",
+  "scripts": {
+    "start:testrpc": "ganache-cli -p 8545 -i 5777",
+    "semantic-release": "semantic-release",
+    "dev": "sls offline start",
+    "test": "nyc mocha -r ts-node/register tests/**/*.spec.ts --exit && cp ./coverage/coverage-final.json ./coverage/coverage.json",
+    "commit": "npx git-cz",
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "json"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "dependencies": {
+    "@frontier-token-research/frontier-js": "^1.8.5",
+    "aws-sdk": "^2.297.0",
+    "bluebird": "^3.5.1",
+    "graphql": "0.13.0",
+    "graphql-tools": "^3.1.1",
+    "mongodb": "^3.1.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.1",
+    "@types/bluebird": "^3.5.23",
+    "@types/chai": "^4.1.4",
+    "@types/lodash": "^4.14.116",
+    "@types/mocha": "^5.2.5",
+    "@types/mongodb": "^3.1.4",
+    "@types/node": "^8.0.57",
+    "casual-browserify": "^1.5.19-2",
+    "chai": "^4.1.2",
+    "codecov": "^3.0.4",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "request-promise": "^4.2.2",
+    "serverless-offline": "^3.25.9",
+    "serverless-webpack": "^5.2.0",
+    "source-map-support": "^0.5.6",
+    "ts-loader": "^4.5.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.5",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "author": "Abdalah-Hossayn Mokhtar Bacha <mokhtar.bacha@consensys.net>",
+  "license": "MIT",
+  "release": {
+    "verifyConditions": "semantic-release-docker",
+    "publish": {
+      "path": "semantic-release-docker",
+      "name": "frontiertokenresearch/trl-api"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
